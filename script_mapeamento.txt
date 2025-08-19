@@ -1,0 +1,26 @@
+executar.bat
+====================
+
+@echo off
+:: Executar script PowerShell com permissões elevadas
+PowerShell -ExecutionPolicy Bypass -NoProfile -Command "& {Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -File \"%~dp0script.ps1\"' -Verb RunAs}"
+
+
+
+script.ps1
+=====================
+
+
+# Mapear unidade de rede para todos os usuários
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
+  -Name "MapPublica" `
+  -Value 'net use P: \\server1\Publica /persistent:yes' `
+  -PropertyType String
+
+
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
+  -Name "MapADM" `
+  -Value 'net use Z: \\server1\ADM /persistent:yes' `
+  -PropertyType String
