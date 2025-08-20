@@ -1,0 +1,5 @@
+# Liberar HTTPS
+New-NetFirewallRule -DisplayName "Allow HTTPS" -Direction Outbound -Protocol TCP -LocalPort Any -RemotePort 443 -Action Allow
+
+# Liberar HTTP
+New-NetFirewallRule -DisplayName "Allow HTTP" -Direction Outbound -Protocol TCP -LocalPort Any -RemotePort 80 -Action Allow
